@@ -1,4 +1,4 @@
-int SAMPLES = 100;
+int SAMPLES = 1000;
 float R = 0;
 float G = PI*2/3;
 float B = -G;
