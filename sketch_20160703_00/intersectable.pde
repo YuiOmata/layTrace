@@ -25,16 +25,13 @@ class Sphere implements Intersectable {
     if (d >= 0) {
       float s = sqrt(d);
       float t = -b - s;
-      if (t <= 0)  t = -b + s;
-      
-      if (0 < t) {
-        //return true;
-        if (0 < t) {
-          isect.t = t;
-          isect.p = ray.origin.add(ray.dir.scale(t));
-          isect.n = isect.p.sub(center).normalize();
-          isect.material = material;
-        }
+      if (t <= 0)  {
+        t = -b + s;
+      } else { //t > 0
+        isect.t = t;
+        isect.p = ray.origin.add(ray.dir.scale(t));
+        isect.n = isect.p.sub(center).normalize();
+        isect.material = material;
       }
     }
   return isect;

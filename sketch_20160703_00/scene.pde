@@ -1,14 +1,11 @@
-int MAX_DEPTH = 10;
+int MAX_DEPTH = 100;
 Spectrum SKY_COLOR = new Spectrum(0.2, 0.2, 0.2);
 
 class Scene {
   ArrayList<Intersectable> objList = new ArrayList<Intersectable>();
-  
-  
   void add(Intersectable obj){
     objList.add(obj);
   }
-  
   
   Spectrum trace(Ray ray, int depth) {
     if(MAX_DEPTH <= depth) return BLACK; 
@@ -16,12 +13,11 @@ class Scene {
     Intersection isect = intersect(ray);
     if (isect.t != NO_HIT) {
       float dice = random(1.0);
-      println(dice);
       Spectrum spc = new Spectrum(0.0, 0.0, 0.0);    
       
       if(dice < isect.material.reflective){
         return traceReflect(ray, isect, depth);
-      }else {
+      } else {
         spc = spc.add(traceDiffuse(ray, isect, depth));
       }
       spc = spc.add(isect.material.emissive);
